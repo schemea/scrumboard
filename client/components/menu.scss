@@ -1,0 +1,19 @@
+@import "@styles/variables";
+
+.menu {
+  background-color: white;
+  padding: 10px 0;
+  border-radius: 2px;
+  z-index: 51;
+
+  .action {
+    transition: background-color 0.1s ease-out;
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+      background-color: #cccccc;
+    }
+  }
+}

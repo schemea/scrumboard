@@ -1,0 +1,23 @@
+@import "@styles/variables";
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 101;
+  pointer-events: none;
+
+  > .content {
+    pointer-events: all;
+    box-shadow: 0 0 10px 10px #fff8, 0 0 15px 15px #fff5;
+    background-color: white;
+    border-radius: $corner-radius;
+    min-width: 80vw;
+    min-height: 80vh;
+  }
+}
