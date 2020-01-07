@@ -5,7 +5,7 @@ import * as path from "path";
 import nodeExternals from "webpack-node-externals";
 
 
-const config = lodash.merge(webpackConfig, {
+const config = lodash.merge({}, webpackConfig, {
     entry: { server: path.join(__dirname, "index.ts") },
     target: "node",
     externals: [

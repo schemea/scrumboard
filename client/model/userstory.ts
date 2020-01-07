@@ -1,10 +1,13 @@
 import { User } from "./user";
+import { Status } from "./status";
 
 let count = 0;
 
 export interface UserStory {
     id: string;
     name: string;
+    status?: Status;
+    flags?: number;
     description?: string;
     assignees: User[];
     effort?: number;
@@ -14,12 +17,14 @@ export interface UserStory {
     started?: Date;
     done?: Date;
     validated?: Date;
+
+    sprint?: unknown;
 }
 
-export function createUserStory(name: string): UserStory {
+export function createUserStory(story: Partial<UserStory> & {name: string}): UserStory {
     return {
-        id: `us-${ ++count }`,
-        name,
         assignees: [],
+        ...story,
+        id: `US-${ ++count }`,
     }
 }

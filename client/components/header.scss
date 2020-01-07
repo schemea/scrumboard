@@ -1,0 +1,28 @@
+.main-header {
+  display: grid;
+  grid-auto-columns: fit-content(100px);
+  grid-auto-flow: column;
+
+  background-color: #ccc;
+  border-bottom: 1px solid #888;
+
+  padding: 10px;
+  margin-bottom: 20px;
+
+  > button {
+    &:not(:first-child) {
+      margin: 0 30px;
+    }
+
+    &:hover {
+      background-color: #bbb;
+    }
+
+    font-weight: bold;
+    color: #666;
+
+    padding: 20px;
+    white-space: nowrap;
+    border: 1px solid #aaa;
+  }
+}
