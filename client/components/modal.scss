@@ -14,10 +14,8 @@
 
   > .content {
     pointer-events: all;
-    box-shadow: 0 0 10px 10px #fff8, 0 0 15px 15px #fff5;
+    box-shadow: $glow;
     background-color: white;
     border-radius: $corner-radius;
-    min-width: 80vw;
-    min-height: 80vh;
   }
 }

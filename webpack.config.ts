@@ -31,7 +31,7 @@ export const webpackConfig: Configuration = {
                     {
                         loader: "sass-loader",
                         options: {
-                            sourceMap: true,
+                            sourceMap: mode === "development",
                         },
                     },
                 ],

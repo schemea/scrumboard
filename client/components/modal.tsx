@@ -4,9 +4,11 @@ import { overlay } from "./overlay";
 
 interface Props {
     onCloseRequested: () => void;
+    minWidth?: string;
+    minHeight?: string;
 }
 
-export function ModalComponent({ children, onCloseRequested }: PropsWithChildren<Props>) {
+export function ModalComponent({ children, onCloseRequested, minWidth, minHeight }: PropsWithChildren<Props>) {
     useEffect(() => {
         overlay.show();
         const listener = overlay.addEventListener("hide", onCloseRequested);
@@ -18,7 +20,7 @@ export function ModalComponent({ children, onCloseRequested }: PropsWithChildren
 
     return (
         <div className="modal">
-            <div className="content">
+            <div className="content" style={ { minWidth, minHeight } }>
                 { children }
             </div>
         </div>

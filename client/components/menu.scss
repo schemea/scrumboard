@@ -5,6 +5,7 @@
   padding: 10px 0;
   border-radius: 2px;
   z-index: 51;
+  box-shadow: $light-glow;
 
   .action {
     transition: background-color 0.1s ease-out;

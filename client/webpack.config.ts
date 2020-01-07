@@ -13,7 +13,7 @@ const config = lodash.merge(webpackConfig, {
     },
     target: "web",
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({title: "A Simple Scrumboard"}),
     ],
 } as Configuration);
 

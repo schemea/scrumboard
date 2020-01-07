@@ -1,8 +1,11 @@
 import { User } from "./user";
 
+let count = 0;
+
 export interface UserStory {
+    id: string;
     name: string;
-    description: string;
+    description?: string;
     assignees: User[];
     effort?: number;
     value?: number;
@@ -11,4 +14,12 @@ export interface UserStory {
     started?: Date;
     done?: Date;
     validated?: Date;
+}
+
+export function createUserStory(name: string): UserStory {
+    return {
+        id: `us-${ ++count }`,
+        name,
+        assignees: [],
+    }
 }
