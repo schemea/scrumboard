@@ -9,10 +9,20 @@ import { connect } from "react-redux";
 import { AppState } from "../store/reducer";
 
 function onDragEnd(result: DropResult) {
-    store.dispatch(actions.updateUserStory({
-        id: result.draggableId,
-        status: result.destination?.droppableId as unknown as Status,
-    }));
+    if (result.destination?.droppableId !== result.source.droppableId) {
+        store.dispatch(actions.updateUserStory({
+            id: result.draggableId,
+            status: result.destination?.droppableId as unknown as Status,
+        }));
+    }
+
+    const id = result.draggableId;
+    store.dispatch(actions.removeStoryFromColumn(result.source.droppableId as Status, id));
+
+    if (result.destination) {
+        const column = result.destination.droppableId as Status;
+        store.dispatch(actions.insertStoryInColumn(column, id, result.destination.index));
+    }
 }
 
 interface InnerProps {
@@ -22,7 +32,7 @@ interface InnerProps {
 export const ScrumboardComponent = connect(
     (state: AppState): InnerProps => ({ columns: selectColumnOrder(state) }),
 )(function ({ columns }: InnerProps) {
-    const children = columns.map(id => <StoryColumnComponent id={ id } label={ id } key={ id }/>)
+    const children = columns.map(id => <StoryColumnComponent id={ id } key={ id }/>)
 
     return (
         <DragDropContext onDragEnd={ onDragEnd }>

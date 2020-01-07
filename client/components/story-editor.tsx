@@ -10,7 +10,7 @@ interface Props {
 export function StoryEditorComponent({ story, onCloseRequested }: Props) {
     return (
         <ModalComponent onCloseRequested={ onCloseRequested } minWidth="80vw" minHeight="80vh">
-            TEST
+            COMING SOON!
         </ModalComponent>
     )
 }

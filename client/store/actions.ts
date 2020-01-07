@@ -33,6 +33,14 @@ export const actions = {
     setStoriesOrder(column: Status, order: string[]) {
         return createAction("[UI] Change stories order", { column, order })
     },
+
+    removeStoryFromColumn(column: Status, id: string) {
+        return createAction("[UI] Remove story from column", { column, id })
+    },
+
+    insertStoryInColumn(column: Status, id: string, index: number) {
+        return createAction("[UI] Insert story in column", { column, id, index })
+    },
 };
 
 type ActionIndex = typeof actions;

@@ -24,6 +24,14 @@ export const initialState: AppState = {
 
 export function reducer(state: AppState = initialState, action: Actions): AppState {
     switch (action.type) {
+        case "[UI] Remove story from column":
+            return immutable.updateIn(state, [ "order", "stories", action.column ], (order: string[]) => order.filter(id => id !== action.id));
+        case "[UI] Insert story in column":
+            return immutable.updateIn(state, [ "order", "stories", action.column ], (order: string[]) => order && [
+                ...order.slice(0, action.index),
+                action.id,
+                ...order.slice(action.index),
+            ]);
         case "[AGILE] Create an User Story":
             return {
                 ...state,

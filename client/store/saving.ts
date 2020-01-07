@@ -2,12 +2,16 @@ import { AppState } from "./reducer";
 import { store } from "./index";
 import { actions } from "./actions";
 
-interface SavedAppState {
+export interface SavedAppState {
     state: AppState;
     name: string;
 }
 
-export const appStates: SavedAppState[] = [];
+export let appStates: SavedAppState[] = [];
+
+export function setAppStates(states: SavedAppState[]) {
+    appStates = states;
+}
 
 export function saveAppState(name: string): void {
     appStates.push({
