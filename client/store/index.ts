@@ -3,11 +3,19 @@ import { createStore } from "redux";
 import { devToolsEnhancer } from "redux-devtools-extension";
 import { actions } from "./actions";
 import { Status } from "../model/status";
+import { loadFromJSON } from "./saving";
 
 export let store = createStore(
     reducer,
     devToolsEnhancer({ actionCreators: actions }),
 );
+
+{
+    const json = localStorage.getItem("state");
+    if (json) {
+        loadFromJSON(json);
+    }
+}
 
 export function selectStories(state: AppState) {
     return state.stories;
@@ -28,3 +36,8 @@ export function selectStoryOrder(state: AppState, id: Status) {
 export function selectColumnOrder(state: AppState) {
     return selectOrder(state).columns;
 }
+
+
+store.subscribe(() => {
+    localStorage.setItem("state", JSON.stringify(store.getState()));
+});

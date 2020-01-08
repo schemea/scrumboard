@@ -1,7 +1,6 @@
 import "./header.scss";
-import { appStates, saveAppState, SavedAppState, setAppStates } from "../store/saving";
+import { appStates, deserializeState, saveAppState, SavedAppState, setAppStates } from "../store/saving";
 import React, { Fragment, useCallback, useState } from "react";
-import immutable from "immutable";
 import { StateLoaderComponent } from "./state-loader";
 import { RenderIf } from "./render-if";
 import { StoryEditorComponent } from "./story-editor";
@@ -43,9 +42,7 @@ export function HeaderComponent() {
         const reader  = new FileReader();
         reader.onload = function () {
             const states: SavedAppState[] = JSON.parse(reader.result as string);
-            states.forEach(savedState => {
-                savedState.state.stories = immutable.Map(savedState.state.stories);
-            });
+            states.forEach(savedState => deserializeState(savedState.state));
             setAppStates(states);
         };
         reader.readAsText(file);

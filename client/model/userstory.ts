@@ -1,7 +1,7 @@
 import { User } from "./user";
 import { Status } from "./status";
 
-let count = 0;
+let count = parseInt(localStorage.getItem("nextUS") || "0");
 
 export interface UserStory {
     id: string;
@@ -31,6 +31,8 @@ export function createUserStory(story: Partial<UserStory> & {name: string}): Use
     if (!newStory.id) {
         newStory.id = `US-${ ++count }`;
     }
+
+    localStorage.setItem("nextUS", count.toString());
 
     return newStory;
 }

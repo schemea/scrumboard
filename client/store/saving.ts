@@ -1,6 +1,7 @@
 import { AppState } from "./reducer";
 import { store } from "./index";
 import { actions } from "./actions";
+import immutable from "immutable";
 
 export interface SavedAppState {
     state: AppState;
@@ -38,3 +39,14 @@ export function loadAppState(arg: string | SavedAppState | AppState) {
         store.dispatch(actions.loadAppState(state));
     }
 }
+
+export function deserializeState(state: AppState) {
+    state.stories = immutable.Map(state.stories);
+    state.users   = immutable.Map(state.users);
+
+    return state;
+}
+
+export function loadFromJSON(json: string) {
+    loadAppState(deserializeState(JSON.parse(json)));
+};
