@@ -18,6 +18,10 @@
     overflow: hidden;
     touch-action: none;
 
+    &.blocked {
+      background-color: #b66;
+    }
+
     .more {
       border-radius: 50%;
       position: relative;

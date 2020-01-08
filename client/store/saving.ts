@@ -10,15 +10,35 @@ export interface SavedAppState {
 
 export let appStates: SavedAppState[] = [];
 
+{
+    const states: SavedAppState[] = JSON.parse(localStorage.getItem("appStates") || "[]");
+    states.forEach(savedState => deserializeState(savedState.state));
+    setAppStates(states);
+}
+
 export function setAppStates(states: SavedAppState[]) {
     appStates = states;
 }
 
 export function saveAppState(name: string): void {
-    appStates.push({
+    if (!name) {
+        return;
+    }
+
+    const index = appStates.findIndex(value => value.name === name);
+    const state = {
         name,
         state: store.getState(),
-    });
+    };
+
+    if (index >= 0) {
+        appStates[index] = state;
+    } else {
+        appStates.push(state);
+    }
+
+
+    localStorage.setItem("appStates", JSON.stringify(appStates));
 }
 
 export function loadAppState(name: string): void;
@@ -49,4 +69,4 @@ export function deserializeState(state: AppState) {
 
 export function loadFromJSON(json: string) {
     loadAppState(deserializeState(JSON.parse(json)));
-};
+}

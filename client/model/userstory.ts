@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { Status } from "./status";
+import { Flags } from "./flags";
 
 let count = parseInt(localStorage.getItem("nextUS") || "0");
 
@@ -7,7 +8,7 @@ export interface UserStory {
     id: string;
     name: string;
     status?: Status;
-    flags?: number;
+    flags: Flags | number;
     description?: string;
     assignees: User[];
     effort?: number;
@@ -25,6 +26,7 @@ export function createUserStory(story: Partial<UserStory> & {name: string}): Use
     const newStory= {
         assignees: [],
         id: "",
+        flags: Flags.None,
         ...story,
     };
 

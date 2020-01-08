@@ -14,6 +14,7 @@ import { selectStoryWithID } from "../store";
 import lodash from "lodash";
 import { User } from "../model/user";
 import { actions } from "../store/actions";
+import { Flags } from "../model/flags";
 
 
 function noop() { }
@@ -80,7 +81,7 @@ export const UserStoryComponent = connect(
             { provided => (
                 <div className="user-story-container"
                      ref={ provided.innerRef } { ...provided.dragHandleProps } { ...provided.draggableProps }>
-                    <div className="user-story">
+                    <div className={ classNames("user-story", { blocked: data.flags & Flags.Blocked }) }>
                         <div className="header">
                                 <span>
                                     { data.name }

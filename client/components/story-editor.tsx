@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { AppState } from "../store/reducer";
 import { User } from "../model/user";
 import lodash from "lodash";
+import immutable from "immutable";
+import { Flags } from "../model/flags";
 
 
 interface InnerProps {
@@ -46,23 +48,45 @@ export const StoryEditorComponent = connect(
             }
         }
 
-        const assignable = users.map(user => (
-            <label key={ user.id }>
-                <input type="checkbox" defaultChecked={ !!story.assignees.find(value => value.id === user.id) }
-                       onChange={ assigneeChanged.bind(null, user) }/>
-                { user.name } [{ user.role.toLocaleUpperCase() }]
-            </label>
-        ));
+    const assignable = users.map(user => (
+        <label key={ user.id }>
+            <input type="checkbox" defaultChecked={ !!story.assignees.find(value => value.id === user.id) }
+                   onChange={ assigneeChanged.bind(null, user) }/>
+            { user.name } [{ user.role.toLocaleUpperCase() }]
+        </label>
+    ));
 
-        return (
-            <ModalComponent onCloseRequested={ onCloseRequested } minWidth="80vw" minHeight="80vh">
-                <form className="story-editor">
-                    <InputField label="name" onChange={ setter("name") } value={ story.name }/>
-                    <InputField label="effort" onChange={ setter("effort") } value={ story.effort || undefined }/>
-                    <InputField label="value" onChange={ setter("value") } value={ story.value || undefined }/>
-                    <InputField label="description" onChange={ setter("description") } value={ story.description }/>
-                    { assignable }
-                </form>
+    function setBlocked(event: React.ChangeEvent<HTMLInputElement>) {
+        const newStory = immutable.updateIn(
+            story,
+            [ "flags" ],
+            (value: Flags | number) => {
+                return  event.target.checked ? value | Flags.Blocked : value & ~Flags.Blocked;
+            },
+        );
+
+        onChange(newStory);
+    }
+
+    return (
+        <ModalComponent onCloseRequested={ onCloseRequested } minWidth="80vw" minHeight="80vh">
+            <form className="story-editor">
+                <InputField label="name" onChange={ setter("name") } value={ story.name || "" }/>
+                <InputField label="effort" onChange={ setter("effort") } value={ story.effort || "" }/>
+                <InputField label="value" onChange={ setter("value") } value={ story.value || "" }/>
+                <InputField label="description" onChange={ setter("description") } value={ story.description || "" }/>
+
+                <label>
+                    <input type="checkbox" defaultChecked={ !!(story.flags & Flags.Blocked) }
+                           onChange={ setBlocked }/>
+                    Blocked
+                </label>
+
+                <br/>
+                <br/>
+
+                { assignable }
+            </form>
             </ModalComponent>
         )
     },
