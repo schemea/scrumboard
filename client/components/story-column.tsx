@@ -22,6 +22,7 @@ interface Props {
 
 //todo: put it in a better place
 const LabelMap: { [k in Status]: string } = {
+    [Status.Backlog]: "BACKLOG",
     [Status.Done]: "DONE",
     [Status.InProgress]: "DOING",
     [Status.Reviewing]: "CODE REVIEW",

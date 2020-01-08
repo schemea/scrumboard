@@ -1,0 +1,36 @@
+.state-loader {
+  padding: 20px;
+
+  &.nothing{
+    display: flex;
+    align-items: center;
+    justify-content: center;;
+  }
+
+  .state-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+
+    border: 1px solid #bbb;
+
+    > * {
+      transition: background-color 0.1s ease-out;
+      padding: 5px;
+      cursor: pointer;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #bbb;
+      }
+
+      &:nth-child(even) {
+        background-color: #0001;
+      }
+
+      &:hover {
+        background-color: #0003;
+      }
+    }
+  }
+}

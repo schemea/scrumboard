@@ -22,9 +22,15 @@ export interface UserStory {
 }
 
 export function createUserStory(story: Partial<UserStory> & {name: string}): UserStory {
-    return {
+    const newStory= {
         assignees: [],
+        id: "",
         ...story,
-        id: `US-${ ++count }`,
+    };
+
+    if (!newStory.id) {
+        newStory.id = `US-${ ++count }`;
     }
+
+    return newStory;
 }

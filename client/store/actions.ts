@@ -22,6 +22,14 @@ export const actions = {
         return createAction("[AGILE] Update an User Story", { value: story })
     },
 
+    clearAllUserStories() {
+        return createAction("[AGILE] Clear all User Stories");
+    },
+
+    removeUserStory(story: UserStory) {
+        return createAction("[AGILE] Remove an User Story", { value: story });
+    },
+
     loadAppState(state: AppState) {
         return createAction("[CORE] Load Application State", { value: state });
     },

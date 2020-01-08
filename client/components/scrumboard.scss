@@ -1,10 +1,12 @@
 .scrumboard {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 380px;
-grid-gap: 20px;
+  grid-auto-columns: minmax(300px, 1fr);
+  grid-gap: 15px;
+  padding: 10px;
 
   > .story-column {
-    width: min(380px);
+    width: 100%;
+    box-sizing: border-box;
   }
 }

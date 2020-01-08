@@ -17,5 +17,8 @@
     box-shadow: $glow;
     background-color: white;
     border-radius: $corner-radius;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
   }
 }

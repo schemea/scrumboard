@@ -9,30 +9,6 @@ export let store = createStore(
     devToolsEnhancer({ actionCreators: actions }),
 );
 
-store.dispatch(actions.createUserStory({
-    name: "A",
-    status: Status.ToDo,
-    assignees: [ { name: "fred", role: "dev", id: "usr-1" }, { name: "frank", role: "dev", id: "usr-2" } ],
-}));
-
-store.dispatch(actions.createUserStory({
-    name: "B",
-    status: Status.ToDo,
-    assignees: [ { name: "fred", role: "dev", id: "usr-1" }, { name: "frank", role: "dev", id: "usr-2" } ],
-}));
-
-store.dispatch(actions.createUserStory({
-    name: "C",
-    status: Status.ToDo,
-    assignees: [ { name: "fred", role: "dev", id: "usr-1" }, { name: "frank", role: "dev", id: "usr-2" } ],
-}));
-
-store.dispatch(actions.createUserStory({
-    name: "D",
-    status: Status.ToDo,
-    assignees: [ { name: "fred", role: "dev", id: "usr-1" }, { name: "frank", role: "dev", id: "usr-2" } ],
-}));
-
 export function selectStories(state: AppState) {
     return state.stories;
 }

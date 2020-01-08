@@ -10,6 +10,6 @@ export function createUser(name: string, role: string): User {
     return {
         name,
         role,
-        id: `user-${ ++count }`,
+        id: `USR-${ ++count }`,
     }
 }
