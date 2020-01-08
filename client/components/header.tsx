@@ -1,6 +1,6 @@
 import "./header.scss";
 import { appStates, deserializeState, saveAppState, SavedAppState, setAppStates } from "../store/saving";
-import React, { Fragment, useCallback, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { StateLoaderComponent } from "./state-loader";
 import { RenderIf } from "./render-if";
 import { StoryEditorComponent } from "./story-editor";
@@ -32,7 +32,10 @@ export function HeaderComponent() {
         anchor.click();
     };
 
-    const imp = () => input?.click();
+    const imp = () => {
+        console.log(input)
+        input?.click();
+    }
 
     const loadJSON = () => {
         const file = input?.files?.item(0);
@@ -48,10 +51,9 @@ export function HeaderComponent() {
         reader.readAsText(file);
     };
 
-    const setInputRef = useCallback(function (element: HTMLInputElement) {
-            input = element;
-        }, [ input ],
-    );
+    function setInputRef(element: HTMLInputElement) {
+        input = element;
+    }
 
     const [ newStory, setNewStory ] = useState();
 
