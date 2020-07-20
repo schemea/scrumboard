@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LanguageInjectionConfiguration">
+    <injection language="PostgreSQL" injector-id="java">
+      <display-name>Select.value (org.apache.ibatis.annotations)</display-name>
+      <place>psiMethod().withName(&quot;value&quot;).withParameters().definedInClass(&quot;org.apache.ibatis.annotations.Select&quot;)</place>
+    </injection>
+  </component>
+</project>

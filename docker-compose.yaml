@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres
+    container_name: "scrumboard-postgres"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=scrumboard
+    ports:
+      - 5432:5432
+  tomcat:
+    image: tomcat:9-jdk14-openjdk-slim-buster
+    container_name: "scrumboard-tomcat"
+    environment:
+      - JPDA_ADDRESS=*:8000
+      - JPDA_TRANSPORT=dt_socket
+    ports:
+      - 8080:8080
+      - 8000:8000
+    volumes:
+      - ./server/build/libs/scrumboard-graphql.war:/usr/local/tomcat/webapps/graphql.war:ro
+    command: /usr/local/tomcat/bin/catalina.sh jpda run
+  graphiql:
+    image: npalm/graphiql
+    container_name: "scrumboard-graphiql"
+    environment:
+      - API_URL=http://localhost:8080/graphql
+    ports:
+      - 4000:4000

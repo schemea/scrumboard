@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrumboard-api
+  labels:
+    app: scrumboard-api
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: scrumboard-api
+      labels:
+        app: scrumboard-api
+    spec:
+      containers:
+        - name: scrumboard-api
+          image: scrumboard-api
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: scrumboard-api
